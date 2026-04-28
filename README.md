@@ -2,7 +2,11 @@
 
 Requires Docker version 29.3.0 or later and at least 2 available threads.
 The pipelie will pull the appropriate Docker images automatically.
-Assumes the FastQ files have been placed within the `fastq/` direcotry. Each step is annotated within the script itself.
+Assumes the [FastQ files](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1458247) have been placed within the `fastq/` directory. Each step is annotated within the script itself.
+
+Download FastQ files from:
+
+[https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1458247](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1458247)
 
 # Run Qiime2 analysis
 
