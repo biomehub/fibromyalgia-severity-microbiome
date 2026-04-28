@@ -8,25 +8,25 @@
 BOLDBLUE='\033[1;34m'
 NC='\033[0m'
 
-# # Step 1: Create necessary directory structure for the analysis
-# echo -e "${BOLDBLUE}Step 1: Creating directory structure for QIIME2 analysis...${NC}"
-# docker run -v /${PWD}/:/workspace quay.io/qiime2/core:2023.5 bash -c \
-#     "mkdir -p /workspace/artfacts/qc /workspace/artfacts/composition /workspace/visualizations/qc /workspace/visualizations/composition"
+# Step 1: Create necessary directory structure for the analysis
+echo -e "${BOLDBLUE}Step 1: Creating directory structure for QIIME2 analysis...${NC}"
+docker run -v /${PWD}/:/workspace quay.io/qiime2/core:2023.5 bash -c \
+    "mkdir -p /workspace/artfacts/qc /workspace/artfacts/composition /workspace/visualizations/qc /workspace/visualizations/composition"
 
-# # Step 2: Import demultiplexed sequences into QIIME2 artifact
-# echo -e "${BOLDBLUE}Step 2: Importing demultiplexed sequences into QIIME2 artifact...${NC}"
-# docker run -v /${PWD}/:/workspace quay.io/qiime2/core:2023.5 bash -c \
-#     "qiime tools import --type SampleData[SequencesWithQuality] --input-path /workspace/fastq --output-path /workspace/artfacts/demultiplexed-sequences.qza --input-format CasavaOneEightSingleLanePerSampleDirFmt"
+# Step 2: Import demultiplexed sequences into QIIME2 artifact
+echo -e "${BOLDBLUE}Step 2: Importing demultiplexed sequences into QIIME2 artifact...${NC}"
+docker run -v /${PWD}/:/workspace quay.io/qiime2/core:2023.5 bash -c \
+    "qiime tools import --type SampleData[SequencesWithQuality] --input-path /workspace/fastq --output-path /workspace/artfacts/demultiplexed-sequences.qza --input-format CasavaOneEightSingleLanePerSampleDirFmt"
 
-# # Step 3: Perform quality control on FASTQ files using FastQC
-# echo -e "${BOLDBLUE}Step 3: Performing quality control on FASTQ files using FastQC...${NC}"
-# docker run -v /${PWD}/:/workspace biomehub/fastqc:0.11.8 bash -c \
-#     ' fastqc /workspace/fastq/* -o /workspace/fastq -t 2'
+# Step 3: Perform quality control on FASTQ files using FastQC
+echo -e "${BOLDBLUE}Step 3: Performing quality control on FASTQ files using FastQC...${NC}"
+docker run -v /${PWD}/:/workspace biomehub/fastqc:0.11.8 bash -c \
+    ' fastqc /workspace/fastq/* -o /workspace/fastq -t 2'
 
-# # Step 4: Aggregate FastQC reports into a single MultiQC report
-# echo -e "${BOLDBLUE}Step 4: Aggregating FastQC reports into a single MultiQC report...${NC}"
-# docker run -v /${PWD}/:/workspace staphb/multiqc:1.19 bash -c \
-#     "multiqc --filename /workspace/artfacts/qc/multiqc_report /workspace/fastq"
+# Step 4: Aggregate FastQC reports into a single MultiQC report
+echo -e "${BOLDBLUE}Step 4: Aggregating FastQC reports into a single MultiQC report...${NC}"
+docker run -v /${PWD}/:/workspace staphb/multiqc:1.19 bash -c \
+    "multiqc --filename /workspace/artfacts/qc/multiqc_report /workspace/fastq"
 
 # Step 5: Generate summary visualization of demultiplexed sequences
 echo -e "${BOLDBLUE}Step 5: Generating summary visualization of demultiplexed sequences...${NC}"
